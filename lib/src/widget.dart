@@ -1103,7 +1103,7 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
       autofocus: true,
       controller: filter.ctrl,
       style: modalHeaderStyle.textStyle,
-      cursorColor: modalConfig.isFullPage ? Colors.white : theme.cursorColor,
+      cursorColor: modalConfig.isFullPage ? Colors.white : theme.focusColor,
       textInputAction: TextInputAction.search,
       decoration: InputDecoration.collapsed(
         hintText: modalConfig.filterHint ?? 'Search on $title',
@@ -1166,14 +1166,19 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
           child: Padding(
             padding: modalConfig.confirmMargin ??
                 const EdgeInsets.fromLTRB(0, 0, 10, 0),
-            child: FlatButton.icon(
+            child: TextButton.icon(
               icon: modalConfig.confirmIcon,
               label: modalConfig.confirmLabel,
-              color:
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
                   modalConfig.confirmIsDark ? modalConfig.confirmColor : null,
-              textColor: modalConfig.confirmIsLight
-                  ? modalConfig.confirmColor
-                  : Colors.white,
+                ),
+                foregroundColor: MaterialStateProperty.all(
+                  modalConfig.confirmIsLight
+                      ? modalConfig.confirmColor
+                      : Colors.white,
+                ),
+              ),
               onPressed: onPressed,
             ),
           ),
@@ -1183,14 +1188,20 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
           child: Padding(
             padding: modalConfig.confirmMargin ??
                 const EdgeInsets.fromLTRB(0, 0, 10, 0),
-            child: FlatButton(
+            child: TextButton(
               child: modalConfig.confirmLabel,
-              color: modalConfig.confirmIsDark
-                  ? modalConfig.confirmColor ?? Colors.blueGrey
-                  : null,
-              textColor: modalConfig.confirmIsLight
-                  ? modalConfig.confirmColor
-                  : Colors.white,
+    style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all(
+    modalConfig.confirmIsDark
+    ? modalConfig.confirmColor ?? Colors.blueGrey
+        : null,
+
+    ),
+
+    foregroundColor: MaterialStateProperty.all(modalConfig.confirmIsLight
+        ? modalConfig.confirmColor
+        : Colors.white,), ),
+
               onPressed: onPressed,
             ),
           ),
